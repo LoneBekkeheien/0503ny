@@ -37,17 +37,22 @@ int ev_check_buttons(){
 
  
 int ev_order_same_floor(){ //DENNE FUNKER IKKE HELT SOM DEN SKAL!!
-    for(int i=0; i<nOrders; i++){ 
+   if(orders[0].floor==elev_get_floor_sensor_signal()){
+   return 1;
+   }
+    
+    for(int i=1; i<nOrders-1; i++){ 
         if(orders[i].floor==elev_get_floor_sensor_signal() && orders[i].direction==0){ //bare heispanel
             return 1;
         }
     }
 
 
-    for(int i=0; i<nOrders; i++){ 
+    for(int i=1; i<nOrders-1; i++){ 
         if(orders[i].floor==elev_get_floor_sensor_signal() && orders[i].direction==direction()){ //bare heispanel
             return 1;
         }
+        
     } 
     return 0;
 }
